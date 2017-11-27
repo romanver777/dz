@@ -10,27 +10,14 @@
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isAllTrue(array, fn) {
-    var result = false;
-    try{
-        if (!(array instanceof Array) || array.length === 0){
+    if (!(array instanceof Array) || array.length === 0){
             throw new Error('empty array');
-        }
-        if (typeof fn != "function"){
-            throw new Error('fn is not a function');
-        }
-        if (fn(array) === true) {
-            result = true;
-        }else {
-            result = false;
-        }
-    }catch (e){
-        console.error(e.message);
     }
-    return result;
-}
-function fn(array) {
-    for (var i = 0; i < array.length; i++){
-        if (array[i] === undefined){
+    if (typeof fn != "function"){
+            throw new Error('fn is not a function');
+    }
+    for (var i = 0; i < array.length; i++) {
+        if (!fn(array[i])){
             return false;
         }
     }
@@ -46,27 +33,14 @@ function fn(array) {
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isSomeTrue(array, fn) {
-    var result = false;
-    try{
-        if (!(array instanceof Array) || array.length === 0){
-            throw new Error('empty array');
-        }
-        if (typeof fn != "function"){
-            throw new Error('fn is not a function');
-        }
-        if (fun(array) === true) {
-            result = true;
-        }else {
-            result = false;
-        }
-    }catch (e){
-        console.error(e.message);
+    if (!(array instanceof Array) || array.length === 0){
+        throw new Error('empty array');
     }
-    return result;
-}
-function fn(array) {
+    if (typeof fn != "function"){
+        throw new Error('fn is not a function');
+    }
     for (var i = 0; i < array.length; i++){
-        if (array[i]){
+        if (fn(array[i])){
             return true;
         }
     }
@@ -83,15 +57,15 @@ function fn(array) {
 function returnBadArguments(fn) {
     var args = [...arguments];
     var badArgs = [];
+    if (typeof fn != "function"){
+        throw new Error('fn is not a function');
+    }
     for (var i = 1; i < args.length; i++) {
         try {
-            if (fn(args[i]) === undefined){
-                throw new Error('fn is not a function');
-            }
+            fn(args[i]);
         } catch (e) {
-            console.error(e.message);
+            badArgs.push(args[i]);
         }
-        badArgs.push(args[i]);
     }
     return badArgs;
 }
@@ -111,44 +85,37 @@ function returnBadArguments(fn) {
  - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
 function calculator(number = 0) {
-    var math = {},
-    args = [...arguments];
-    try{
-        for (var i = 0; i < args.length; i++) {
-            if (typeof arg[i] != "number") {
-                throw new Error("number is not a number");
-            }
-        }
-    } catch (e){
-        console.error(e.message);
+    var math = {};
+    if (typeof number != "number") {
+        throw new Error("number is not a number");
     }
     math.sum = function () {
-        for (var i = 1; i < args.length; i++) {
+        let args = [...arguments];
+        for (var i = 0; i < args.length; i++) {
             number = number + args[i];
         }
         return number;
     };
     math.dif = function () {
-        for (var i = 1; i < args.length; i++){
+        let args = [...arguments];
+        for (var i = 0; i < args.length; i++){
             number = number - args[i];
         }
         return number;
     };
     math.div = function () {
-        for (var i = 1; i < args.length; i++){
-            try {
-                if (args[i] === 0){
-                    throw new Error("division by 0");
-                }
-                number = number / args[i];
-            } catch (e){
-                console.error(e.message);
+        let args = [...arguments];
+        for (var i = 0; i < args.length; i++){
+            if (args[i] === 0){
+                throw new Error("division by 0");
             }
+            number = number / args[i];
         }
         return number;
     };
     math.mul = function () {
-        for (var i = 1; i < args.length; i++){
+        let args = [...arguments];
+        for (var i = 0; i < args.length; i++){
             number = number * args[i];
         }
         return number;
