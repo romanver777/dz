@@ -2,7 +2,6 @@ import { assert } from 'chai';
 import { randomNumberArray, randomStringArray, randomValue as random } from '../helper';
 import { calculator, isAllTrue, isSomeTrue, returnBadArguments } from '../src/index';
 
-
 describe('ДЗ 2 - работа с исключениями и отладчиком', () => {
     describe('isAllTrue', () => {
         it('должна вызывать fn для всех элементов массива', () => {
